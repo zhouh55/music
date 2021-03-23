@@ -1,9 +1,6 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div>
     <router-view />
-    <div class="tttt">22222</div>
   </div>
 </template>
 
@@ -15,9 +12,8 @@
   text-align: center;
   color: #2c3e50;
 }
-.tttt {
-  /* prettier-ignore */
-  font-size: 20PX;
-  width: 200px;
+* {
+  padding: 0;
+  margin: 0;
 }
 </style>

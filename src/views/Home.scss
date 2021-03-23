@@ -1,0 +1,12 @@
+.home{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    .top-container{
+        flex-basis: 70px;
+    }
+    .module-container{
+        flex: 1;
+    }
+}
