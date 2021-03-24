@@ -7,6 +7,7 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
+  name: 'Friend',
   setup() {
     return {};
   }

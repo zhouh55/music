@@ -5,6 +5,7 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
+  name: 'MyMusic',
   setup() {
     return {};
   }

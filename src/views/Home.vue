@@ -1,16 +1,17 @@
 <template>
   <div class="home">
-    <Top class="top-container" />
+    <TopBar class="top-container" />
     <router-view class="module-container" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
-import Top from './top/Index.vue';
+import { defineComponent, reactive } from 'vue';
+import { ComponentName } from './typing';
+import TopBar from './topBar/Index.vue';
 export default defineComponent({
   components: {
-    Top
+    TopBar
   },
 
   // emits: [ 'addBook' ],
@@ -25,11 +26,20 @@ export default defineComponent({
 
   setup(props, ctx) {
     console.log(ctx);
-    const componentName = ref<string>('Found');
+    // const componentName = ref<string>('Found');
+    // const componentName = readonly<object>( { a: 1});
 
-    return {
-      componentName
-    };
+    const componentName = reactive<ComponentName>({ a: 1, b: 2 });
+    // const { a, b } = toRefs(componentName);
+    // a.value = 2333;
+    // const c = 11;
+    componentName.a = 3;
+    // console.log(a, b);
+
+    // const componentName = markRaw<object>( { a: 1} );
+    console.log(componentName);
+
+    return {};
   }
 });
 </script>

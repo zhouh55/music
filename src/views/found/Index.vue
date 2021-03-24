@@ -5,6 +5,7 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
+  name: 'Found',
   setup() {
     return {};
   }
