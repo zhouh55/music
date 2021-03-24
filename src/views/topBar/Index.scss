@@ -1,3 +1,48 @@
 .top-bar-container{
-   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #cccccc;
+   .left{
+       margin-right: 20px;
+       font-size: 32px;
+       color: white;
+       &>img{
+           width: 50px;
+           height: 50px;
+           vertical-align: middle;
+       }
+   }
+   .mid{
+        span{
+            padding: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            &:hover{
+                color: white;
+                background-color: #000000;
+            }
+        }
+        .active{
+            color: white;
+            background-color: #000000;
+        }
+   }
+   .right{
+       display: flex;
+       align-items: center;
+       span{
+           white-space: pre;
+           margin-left: 20px;
+           cursor: pointer;
+           border-bottom: 1px solid #000000;
+           &:hover{
+               color: white;
+               border-bottom: 1px solid white;
+           }
+       }
+       ::v-deep .el-input__inner{
+           border-radius: 20px;
+       }
+   }
 }
