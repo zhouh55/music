@@ -1,0 +1,11 @@
+:deep(.base-dialog-container){
+    .el-dialog__header{
+        text-align: left;
+    }
+    .footer-container{
+        text-align: center;
+        .primary-btn{
+            margin-right: 60px;
+        }
+    }
+}

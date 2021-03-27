@@ -8,5 +8,5 @@ import store from './store';
 createApp(App)
   .use(store)
   .use(router)
-  .use(ElementPlus)
+  .use(ElementPlus, { size: 'small' })
   .mount('#app');

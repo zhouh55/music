@@ -30,35 +30,58 @@
         size="small"
         placeholder="音乐/用户"
       />
-      <span>登录</span>
+      <span @click="handleLoginBtn">登录</span>
     </div>
+    <login-dialog
+      v-if="loginDialogInfos.visible"
+      v-bind="loginDialogInfos"
+      @close="loginDialogInfos.visible = false"
+    />
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
-
+import { defineComponent, reactive, ref } from 'vue';
+import { LoginDialogInfos } from './typing';
+import LoginDialog from './LoginDialog/index.vue';
 export default defineComponent({
   name: 'TopBar',
+  components: {
+    LoginDialog
+  },
+
   setup() {
     const activeModule = ref<string>('');
     const searchKey = ref<string>('');
+    const loginDialogInfos = reactive<LoginDialogInfos>({
+      visible: false
+    });
 
     const handleModule = (type: string) => {
       activeModule.value = type;
     };
-
-    const isActiveModule = (type: string): boolean =>
-      activeModule.value === type;
+    const isActiveModule = (type: string): boolean => {
+      return activeModule.value === type;
+    };
+    const handleLoginBtn = () => {
+      loginDialogInfos.visible = true;
+    };
 
     return {
+      // methods
+      handleLoginBtn,
       handleModule,
+      isActiveModule,
+
+      // ref
       activeModule,
       searchKey,
-      isActiveModule
+
+      //  reactive
+      loginDialogInfos
     };
   }
 });
 </script>
 <style lang="scss" scoped>
-@import './Index.scss';
+@import './index.scss';
 </style>

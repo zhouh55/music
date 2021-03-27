@@ -41,7 +41,7 @@
                border-bottom: 1px solid white;
            }
        }
-       ::v-deep .el-input__inner{
+       :deep(.el-input__inner){
            border-radius: 20px;
        }
    }
