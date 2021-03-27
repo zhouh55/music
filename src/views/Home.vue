@@ -8,7 +8,7 @@
 <script lang="ts">
 import { defineComponent, reactive } from 'vue';
 import { ComponentName } from './typing';
-import TopBar from './topBar/Index.vue';
+import TopBar from './TopBar/index.vue';
 export default defineComponent({
   components: {
     TopBar
