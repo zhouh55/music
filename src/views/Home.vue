@@ -26,6 +26,7 @@ export default defineComponent({
 
   setup(props, ctx) {
     console.log(ctx);
+
     // const componentName = ref<string>('Found');
     // const componentName = readonly<object>( { a: 1});
 
