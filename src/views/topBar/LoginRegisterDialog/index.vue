@@ -1,3 +1,4 @@
+// 登录 注册 弹窗
 <template>
   <BaseDialog
     v-bind="$attrs"

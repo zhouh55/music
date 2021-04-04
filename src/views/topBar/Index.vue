@@ -32,7 +32,7 @@
       />
       <span @click="handleLoginBtn">登录</span>
     </div>
-    <login-dialog
+    <LoginRegisterDialog
       v-if="loginDialogInfos.visible"
       v-bind="loginDialogInfos"
       @close="loginDialogInfos.visible = false"
@@ -40,13 +40,14 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue';
+import { defineAsyncComponent, defineComponent, reactive, ref } from 'vue';
 import { LoginDialogInfos } from './typing';
-import LoginDialog from './LoginDialog/index.vue';
 export default defineComponent({
   name: 'TopBar',
   components: {
-    LoginDialog
+    LoginRegisterDialog: defineAsyncComponent(() =>
+      import('./LoginRegisterDialog/index.vue')
+    )
   },
 
   setup() {
