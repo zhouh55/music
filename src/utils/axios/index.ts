@@ -1,8 +1,9 @@
 import http, { AxiosResponse } from 'axios';
+import { getCookie } from '../cookie';
 import { Axios, ThenResult } from './typing';
 
 http.interceptors.request.use(config => {
-  const authorization = '111';
+  const authorization = getCookie('token');
   if (authorization) {
     config.headers.authorization = authorization;
   }
