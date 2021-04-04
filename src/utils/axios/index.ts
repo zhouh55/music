@@ -1,8 +1,8 @@
-import http, { AxiosResponse } from 'axios';
+import axios from 'axios';
+import { ElMessage } from 'element-plus/lib';
 import { getCookie } from '../cookie';
-import { Axios, ThenResult } from './typing';
 
-http.interceptors.request.use(config => {
+axios.interceptors.request.use(config => {
   const authorization = getCookie('token');
   if (authorization) {
     config.headers.authorization = authorization;
@@ -10,23 +10,16 @@ http.interceptors.request.use(config => {
   return config;
 });
 
-const getFn = (
-  url: string,
-  params?: object
-): Promise<AxiosResponse<ThenResult>> => {
-  return http.get(url, { params: params });
-};
+axios.interceptors.response.use(res => {
+  if (typeof res.data !== 'object') {
+    ElMessage.error('服务端出错！');
+    return Promise.reject(res);
+  }
 
-const postFn = (
-  url: string,
-  params?: object
-): Promise<AxiosResponse<ThenResult>> => {
-  return http.post(url, params);
-};
+  if (res.data.code === 200) return res.data;
 
-const axios: Axios = {
-  get: getFn,
-  post: postFn
-};
+  ElMessage.error(res.data.message);
+  return Promise.reject(res.data);
+});
 
 export default axios;

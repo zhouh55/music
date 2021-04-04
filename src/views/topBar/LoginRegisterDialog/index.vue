@@ -6,15 +6,15 @@
     width="25%"
     @handleSubmit="handleSubmit"
   >
-    <el-form class="body-container">
-      <el-form-item v-model="userFormData">
-        <el-input v-model="userFormData.account" placeholder="账号" />
+    <el-form class="body-container" label-width="auto">
+      <el-form-item label="账号">
+        <el-input v-model="userFormData.account" placeholder="请输入账号" />
       </el-form-item>
-      <el-form-item>
+      <el-form-item label="密码">
         <el-input
           type="password"
           v-model="userFormData.password"
-          placeholder="密码"
+          placeholder="请输入密码"
         />
       </el-form-item>
     </el-form>
@@ -25,7 +25,6 @@ import { defineComponent, reactive, defineAsyncComponent } from 'vue';
 import { LoginResult, UserFormData } from './typing';
 import axios from '@/utils/axios/index';
 import { setCookie } from '@/utils/cookie/index';
-import { ElMessage } from 'element-plus/lib';
 export default defineComponent({
   components: {
     BaseDialog: defineAsyncComponent(() =>
@@ -39,21 +38,12 @@ export default defineComponent({
       password: ''
     });
 
-    const handleSubmit = () => {
-      axios
-        .post('/api/login', userFormData)
-        .then(res => {
-          const resData = res.data;
-          if (resData.code === 200) {
-            const token = (resData.data as LoginResult).token;
-            setCookie('token', token);
-            ElMessage.success('登录成功！');
-          } else {
-            ElMessage.error(resData.message);
-          }
-        })
-        .catch(err => console.log(err));
+    const handleSubmit = async () => {
+      const { data } = await axios.get('/api/login', { params: userFormData });
+      if (data?.code !== 200) return;
 
+      const token = (data.data as LoginResult).token;
+      setCookie('token', token);
       emit('close');
     };
 

@@ -4,7 +4,7 @@
       v-bind="$attrs"
       v-model="dialogVisible"
       custom-class="base-dialog-container"
-      @close="$emit('handleSubmit')"
+      @close="$emit('close')"
     >
       <slot />
       <template #footer>
