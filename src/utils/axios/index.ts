@@ -1,7 +1,6 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { ElMessage } from 'element-plus/lib';
 import { getCookie } from '../cookie';
-
 axios.interceptors.request.use(config => {
   const authorization = getCookie('token');
   if (authorization) {
@@ -10,7 +9,7 @@ axios.interceptors.request.use(config => {
   return config;
 });
 
-axios.interceptors.response.use(res => {
+axios.interceptors.response.use((res: AxiosResponse) => {
   if (typeof res.data !== 'object') {
     ElMessage.error('服务端出错！');
     return Promise.reject(res);
