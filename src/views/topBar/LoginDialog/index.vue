@@ -1,5 +1,5 @@
 <template>
-  <base-dialog
+  <BaseDialog
     v-bind="$attrs"
     title="登录"
     width="25%"
@@ -17,15 +17,19 @@
         />
       </el-form-item>
     </el-form>
-  </base-dialog>
+  </BaseDialog>
 </template>
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
-import BaseDialog from '@/components/BaseDialog/index.vue';
-import { UserFormData } from './typing';
+import { defineComponent, reactive, defineAsyncComponent } from 'vue';
+import { LoginResult, UserFormData } from './typing';
+import axios from '@/utils/axios/index';
+import { setCookie } from '@/utils/cookie/index';
+import { ElMessage } from 'element-plus/lib';
 export default defineComponent({
   components: {
-    BaseDialog
+    BaseDialog: defineAsyncComponent(() =>
+      import('@/components/BaseDialog/index.vue')
+    )
   },
   // emits: [ 'close' ],
   setup(props, { emit }) {
@@ -35,6 +39,20 @@ export default defineComponent({
     });
 
     const handleSubmit = () => {
+      axios
+        .post('/api/login', userFormData)
+        .then(res => {
+          const resData = res.data;
+          if (resData.code === 200) {
+            const token = (resData.data as LoginResult).token;
+            setCookie('token', token);
+            ElMessage.success('登录成功！');
+          } else {
+            ElMessage.error(resData.message);
+          }
+        })
+        .catch(err => console.log(err));
+
       emit('close');
     };
 
