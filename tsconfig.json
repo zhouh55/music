@@ -18,9 +18,10 @@
       "jest"
     ],
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": [ "src/*" ],
+      "@view/*": [ "src/views/*"],
+      "@utils/*": [ "src/utils/*"],
+      "@components/*": [ "src/components/*"],
     },
     "lib": [
       "esnext",

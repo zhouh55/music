@@ -30,8 +30,13 @@
         size="small"
         placeholder="音乐/用户"
       />
-      <span @click="handleLoginBtn">登录</span>
+
+      <div class="status-container">
+        <span v-if="!isLogin" @click="handleLoginBtn">登录</span>
+        <AvatarDown v-else />
+      </div>
     </div>
+
     <LoginRegisterDialog
       v-if="loginDialogInfos.visible"
       v-bind="loginDialogInfos"
@@ -40,17 +45,32 @@
   </div>
 </template>
 <script lang="ts">
-import { defineAsyncComponent, defineComponent, reactive, ref } from 'vue';
+import {
+  computed,
+  defineAsyncComponent,
+  defineComponent,
+  reactive,
+  ref
+} from 'vue';
 import { LoginDialogInfos } from './typing';
+import AvatarDown from '@view/TopBar/AvatarDown/index.vue';
+import { useStore } from 'vuex';
+import { getCookie } from '@/utils/cookie';
 export default defineComponent({
   name: 'TopBar',
   components: {
     LoginRegisterDialog: defineAsyncComponent(() =>
       import('./LoginRegisterDialog/index.vue')
-    )
+    ),
+    AvatarDown // 头像下拉列表
   },
 
   setup() {
+    const { state, commit } = useStore();
+    commit('updateIsLogin', !!getCookie('token'));
+
+    const isLogin = computed(() => state.isLogin);
+
     const activeModule = ref<string>('');
     const searchKey = ref<string>('');
     const loginDialogInfos = reactive<LoginDialogInfos>({
@@ -78,7 +98,10 @@ export default defineComponent({
       searchKey,
 
       //  reactive
-      loginDialogInfos
+      loginDialogInfos,
+
+      // computed
+      isLogin
     };
   }
 });

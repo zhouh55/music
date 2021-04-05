@@ -6,7 +6,7 @@ export const getCookie = (key: string) => {
   return null;
 };
 
-export const setCookie = (key: string, value: string, time?: number) => {
+export const setCookie = (key: string, value: string, time?: number): void => {
   if (time) {
     const expires = time * 24 * 60 * 60 * 1000;
     const date = new Date(+new Date() + expires);
@@ -16,6 +16,12 @@ export const setCookie = (key: string, value: string, time?: number) => {
   }
 };
 
-// export const removeCookie = () => {};
+export const removeCookie = (key: string): boolean => {
+  const hasCookie = getCookie(key);
+  if (!hasCookie) return false;
+
+  setCookie(key, '', -99);
+  return true;
+};
 
 // export const hasCookie = () => {};

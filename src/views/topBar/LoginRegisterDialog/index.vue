@@ -32,12 +32,14 @@ import {
   reactive,
   defineAsyncComponent,
   ref,
-  computed
+  watch
 } from 'vue';
 import { LoginResult, UserFormData } from './typing';
 import { ResopnseData } from '@/publicType/index';
 import axios from '@/utils/axios/index';
 import { setCookie } from '@/utils/cookie/index';
+import { ElMessage } from 'element-plus/lib';
+import { useStore } from 'vuex';
 export default defineComponent({
   components: {
     BaseDialog: defineAsyncComponent(() =>
@@ -46,14 +48,26 @@ export default defineComponent({
   },
   // emits: [ 'close' ],
   setup(props, { emit }) {
-    const dialogType = ref<string>('login');
-    const isLoginInterface = computed(() => dialogType.value === 'login');
-
-    const userFormData = reactive<UserFormData>({
+    const initialUserFormData = {
       account: '',
       password: '',
       name: ''
-    });
+    };
+
+    const store = useStore();
+    console.log(store);
+
+    const dialogType = ref<string>('login');
+    const isLoginInterface = ref<boolean>(true);
+    const userFormData = reactive<UserFormData>({ ...initialUserFormData });
+
+    watch(
+      () => dialogType.value,
+      () => {
+        isLoginInterface.value = dialogType.value === 'login';
+        Object.assign(userFormData, initialUserFormData);
+      }
+    );
 
     const handleChangeBtn = () => {
       dialogType.value = isLoginInterface.value ? 'register' : 'login';
@@ -61,17 +75,25 @@ export default defineComponent({
 
     const login = async () => {
       const data: ResopnseData = await axios.post('/api/login', userFormData);
-
       if (data?.code !== 200) return;
 
       const token = (data.data as LoginResult).token;
       setCookie('token', token);
+      store.commit('updateIsLogin', true);
       emit('close');
     };
 
     const register = async () => {
-      const data = await axios.post('/api/register', userFormData);
-      console.log(data);
+      const data: ResopnseData = await axios.post(
+        '/api/register',
+        userFormData
+      );
+
+      if (data.code !== 200) return;
+
+      Object.assign(userFormData, initialUserFormData);
+      dialogType.value = 'login';
+      ElMessage.success(data.message);
     };
 
     const handleSubmit = () => {

@@ -1,3 +1,4 @@
+const path = require('path');
 module.exports = {
   lintOnSave: false,
   productionSourceMap: false,
@@ -26,6 +27,11 @@ module.exports = {
       .use('worker-loader')
       .loader('worker-loader')
       .end();
+
+    config.resolve.alias
+      .set('@view', path.join(__dirname, 'src/views'))
+      .set('@utils', path.join(__dirname, 'src/utils'))
+      .set('@components', path.join(__dirname, 'src/components'));
 
     config.optimization.splitChunks({
       chunks: 'all',
