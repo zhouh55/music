@@ -53,9 +53,10 @@ import {
   ref
 } from 'vue';
 import { LoginDialogInfos } from './typing';
-import AvatarDown from '@view/TopBar/AvatarDown/index.vue';
 import { useStore } from 'vuex';
 import { getCookie } from '@/utils/cookie';
+import AvatarDown from '@view/TopBar/AvatarDown/index.vue';
+
 export default defineComponent({
   name: 'TopBar',
   components: {
