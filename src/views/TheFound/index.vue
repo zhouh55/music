@@ -3,18 +3,21 @@
     <div class="type-list-container">
       <SubBar :render-list="subList" />
     </div>
-    <div class="rotate-img-container"></div>
+    <div class="rotate-img-container">
+      <component :is="'TheRecommend'" />
+    </div>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
 import SubBar from '@components/SubBar/index.vue';
-
+import TheRecommend from './TheRecommend/index.vue';
 export default defineComponent({
   name: 'Found',
 
   components: {
-    SubBar
+    SubBar,
+    TheRecommend
   },
 
   setup() {
@@ -46,3 +49,6 @@ export default defineComponent({
   }
 });
 </script>
+<style lang="scss" scoped>
+@import './index.scss';
+</style>

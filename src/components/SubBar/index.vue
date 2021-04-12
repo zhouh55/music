@@ -1,25 +1,50 @@
 <template>
   <div class="sub-bar-container" :class="triangle">
     <div class="list-box">
-      <span v-for="item of renderListAry" :key="item.id">
+      <span
+        v-for="item of renderListAry"
+        :class="{ 'active-class': activeId === item.id }"
+        :key="item.id"
+        @click="handleModelBtn(item)"
+      >
         {{ item.label }}</span
       >
     </div>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, toRefs } from 'vue';
-
+import { defineComponent, PropType, ref, onMounted } from 'vue';
+import { RenderListSon, RenderList } from './typing';
 export default defineComponent({
   props: {
-    renderList: { type: Array }
+    renderList: {
+      type: Array as PropType<RenderList>,
+      default: () => []
+    }
   },
-  setup(props) {
+  setup(props, { emit }) {
     const triangle = 'found-triangle-class'; // TODO 缺少一个和路由相关映射
-    const { renderList } = toRefs(props);
+    const activeId = ref<number>(-1);
+
+    onMounted(() => {
+      if (!props.renderList.length) return;
+
+      activeId.value = props.renderList[0].id;
+    });
+
+    // methods
+    const handleModelBtn = (item: RenderListSon) => {
+      activeId.value = item.id;
+      emit('handleModelBtn', item);
+    };
+
     return {
-      renderListAry: renderList,
-      triangle
+      renderListAry: props.renderList,
+      triangle,
+      activeId,
+
+      // methods
+      handleModelBtn
     };
   }
 });
@@ -55,6 +80,9 @@ export default defineComponent({
         background-color: #9b0909;
       }
     }
+    .active-class {
+      background-color: #9b0909;
+    }
   }
 }
 
@@ -66,6 +94,7 @@ export default defineComponent({
     left: 750px;
   }
 }
+
 .my-music-triangle-class {
   &::before {
     @include triangle-class;
@@ -73,6 +102,7 @@ export default defineComponent({
     left: 850px;
   }
 }
+
 .friend-triangle-class {
   &::before {
     @include triangle-class;
