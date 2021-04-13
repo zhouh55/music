@@ -9,7 +9,9 @@
       </el-carousel>
     </div>
 
-    <div class="model-list"></div>
+    <div class="model-list">
+      <BaseTypeImg />
+    </div>
   </div>
 </template>
 <script lang="ts">

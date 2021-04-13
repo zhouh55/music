@@ -13,7 +13,7 @@ import { defineComponent } from 'vue';
 import SubBar from '@components/SubBar/index.vue';
 import TheRecommend from './TheRecommend/index.vue';
 export default defineComponent({
-  name: 'Found',
+  name: 'TheFound',
 
   components: {
     SubBar,

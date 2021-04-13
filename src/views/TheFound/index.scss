@@ -1,6 +1,14 @@
 .found-container{
+    position: relative;
     .type-list-container{
         position: relative;
         height: 34px;
+    }
+
+    .rotate-img-container{
+        width: 730px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
