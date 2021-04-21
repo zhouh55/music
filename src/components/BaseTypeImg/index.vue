@@ -1,23 +1,22 @@
 <template>
   <div class="base-type-img-container">
-    <div>
-      <el-image style="width: 140px;height: 140px" />
-      <p>
+    <div class="img-description">
+      <el-image />
+      <p class="description-box">
         <span>
-          <i />
+          <i class="el-icon-headset" />
           <span>102万</span>
         </span>
-
-        <i> 播放按钮 </i>
+        <i class="el-icon-video-play" />
       </p>
     </div>
 
-    <div>
+    <p>
       描述
-    </div>
-    <div>
+    </p>
+    <p>
       可选
-    </div>
+    </p>
   </div>
 </template>
 <script lang="ts">
@@ -30,3 +29,6 @@ export default defineComponent({
   }
 });
 </script>
+<style scoped lang="scss">
+@import './index.scss';
+</style>

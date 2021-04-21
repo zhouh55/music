@@ -1,0 +1,31 @@
+@mixin widthHeight($width: 140px, $height: 140px) {
+    width: $width;
+    height: $height;
+} 
+.base-type-img-container{
+    @include widthHeight(140px, 204px);
+    .img-description{
+        position: relative;
+        :deep(.el-image) {
+           @include widthHeight;
+        }
+        .description-box{
+            position: absolute;
+            bottom: 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 140px;
+            height: 27px;
+            line-height: 27px;
+            background-color: rgba($color: #cccccc, $alpha: .6);
+            font-size: 16px;
+            .el-icon-video-play{
+                cursor: pointer;
+                &:hover{
+                    color: white;
+                }
+            }
+        }
+    }
+}
