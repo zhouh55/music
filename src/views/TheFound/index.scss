@@ -1,4 +1,8 @@
+@import '../../styles/grid.scss';
 .found-container{
+    // @include grid-col-row(1, 1) {
+    //     color: red;
+    // }
     position: relative;
     .type-list-container{
         position: relative;

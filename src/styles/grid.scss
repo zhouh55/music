@@ -1,9 +1,14 @@
 @mixin grid-col-row($col, $row) {
     display: grid;
-    grid-template-columns: repeat($colums, 1fr);
+    grid-template-columns: repeat($col, 1fr);
     grid-template-rows: repeat($row, 1fr);
+    @content;
 }
 
 @mixin grid-gap($col, $row) {
     grid-gap: $col + px, $row + px;
+}
+
+@mixin test() {
+    @content;
 }

@@ -42,3 +42,9 @@
          2、sessionStorage：浏览器窗口是不会共享的
     好处：cookie 的坏处就是 storage 的好处。
         补充：sessionStorag 会随着浏览器的关闭而清空！
+
+
+
+
+# 记录 scss
+1. 在 @mixin 中使用 @content。然后在 @include 的时候可使用 { } 补充内容
