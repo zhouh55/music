@@ -9,7 +9,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, getCurrentInstance } from 'vue';
 import SubBar from '@components/SubBar/index.vue';
 import TheRecommend from './TheRecommend/index.vue';
 export default defineComponent({

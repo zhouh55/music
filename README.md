@@ -22,7 +22,7 @@
 8. v-bind 和 单独的 property 的合并策略变为写的顺序了
 9. 使用 defineAsyncComponent 异步加载的时候 在 ts 中必须有返回的值
 10. 可以使用 `<T<T>>` 的形式写嵌套类型
-
+11. getCurrentInstance 可以获取当前组件实例
 
 # 记录 TS
 1. 可使用 as 的形式 改变不可用的值

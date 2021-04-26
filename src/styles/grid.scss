@@ -1,0 +1,9 @@
+@mixin grid-col-row($col, $row) {
+    display: grid;
+    grid-template-columns: repeat($colums, 1fr);
+    grid-template-rows: repeat($row, 1fr);
+}
+
+@mixin grid-gap($col, $row) {
+    grid-gap: $col + px, $row + px;
+}
